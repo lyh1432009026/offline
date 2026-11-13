@@ -1,0 +1,18 @@
+# 构建产物：由 scripts/build-vendor.mjs 在联网机一键重建，不进版本库
+# 内网交付时请直接拷贝整个目录（含 vendor/），不要只 clone 仓库
+/vendor/*
+!/vendor/README.md
+
+# 依赖与临时文件
+node_modules/
+*.log
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 本地环境覆盖（可能含内网地址，不入库）
+.env.local
+.env.*.local

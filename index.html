@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>前端内网离线资源库</title>
+<link rel="stylesheet" href="./assets/app.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <h1>前端内网离线资源库</h1>
+        <p class="subtitle">会走公网 CDN 的组件，在这里统一收口成可下载的内网资源包</p>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="notice" role="note">
+    <strong>使用顺序</strong>
+    <span>① 下载对应资源包 → ② 按该组件的教程放到 <code>public/</code> → ③ 改配置文件里的资源路径 → ④ 用 <code>check-offline.mjs</code> 扫一遍构建产物。</span>
+    <a class="notice-link" href="./docs/INDEX.md">教程索引 &rarr;</a>
+  </section>
+
+  <section class="toolbar" aria-label="检索与筛选">
+    <div class="search-row">
+      <label class="search-box">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12.8 12.8 17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <input id="search" type="search" placeholder="搜索组件名、包名、公网域名，例如 vditor / unpkg / pdf" autocomplete="off">
+        <kbd>/</kbd>
+      </label>
+      <button class="btn-ghost" id="reset" type="button">重置筛选</button>
+    </div>
+    <div class="filter-line"><span class="filter-label">分类</span><div class="chips" id="category-chips"></div></div>
+    <div class="filter-line"><span class="filter-label">公网依赖</span><div class="chips" id="host-chips"></div></div>
+  </section>
+
+  <div class="list-head">
+    <h2>组件清单 <span id="result-count"></span></h2>
+    <span class="hint">点卡片查看完整教程 · 点「复制配置」直接取接入片段</span>
+  </div>
+  <section class="grid" id="grid" aria-live="polite"></section>
+  <p class="empty" id="empty" hidden>没有匹配的组件，换个关键词或重置筛选。</p>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span id="footer-meta"></span>
+    <span>页面本身零外部请求，可直接双击打开或发布到内网静态服务。</span>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+  <div class="drawer-head">
+    <div>
+      <div class="drawer-kicker" id="drawer-kicker"></div>
+      <h2 id="drawer-title"></h2>
+    </div>
+    <button class="icon-btn" id="drawer-close" type="button" aria-label="关闭">&times;</button>
+  </div>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="./data/catalog.js"></script>
+<script src="./assets/app.js"></script>
+</body>
+</html>

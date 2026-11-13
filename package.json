@@ -1,0 +1,16 @@
+{
+  "name": "intranet-offline-hub",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "前端内网离线资源库：常用组件 CDN 资源本地化合集 + 逐组件使用教程",
+  "scripts": {
+    "sync": "node scripts/sync.mjs",
+    "serve": "node scripts/serve.mjs",
+    "vendor": "node scripts/build-vendor.mjs",
+    "vendor:all": "node scripts/build-vendor.mjs --all",
+    "vendor:only": "node scripts/build-vendor.mjs --only=",
+    "check": "node scripts/check-offline.mjs"
+  },
+  "engines": { "node": ">=18" }
+}
