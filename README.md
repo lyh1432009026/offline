@@ -58,7 +58,7 @@ nginx -c /srv/offline-hub/deploy/nginx.conf   # 先改配置里的 root
 
 | 路径 | 用途 |
 | --- | --- |
-| `index.html` + `assets/` | 自助下载门户（搜索、按公网域名筛选、教程抽屉、复制配置） |
+| `index.html` + `assets/` | 自助下载门户（搜索、分类筛选、教程抽屉、复制配置） |
 | `catalog.json` | **唯一数据源**：组件元数据 + 教程内容，维护只改这里 |
 | `data/catalog.js` | 由 sync 生成，门户用 script 标签加载（`file://` 下可用） |
 | `docs/*.md` | 由 sync 生成的逐组件独立教程，`INDEX.md` 为索引 |

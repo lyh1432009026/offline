@@ -67,8 +67,6 @@ kbd { border: 1px solid var(--border-strong); border-bottom-width: 2px; border-r
 .chip { border: 1px solid var(--border); background: var(--surface-2); color: var(--text-2); border-radius: 999px; padding: 3px 12px; font-size: 12px; cursor: pointer; line-height: 1.7; }
 .chip:hover { border-color: var(--accent-border); color: var(--accent); }
 .chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-.chip.host { font-family: Consolas, monospace; font-size: 11.5px; }
-.chip-more { border: 0; background: transparent; color: var(--accent); cursor: pointer; font-size: 12px; padding: 3px 6px; }
 
 .list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 26px 0 14px; flex-wrap: wrap; }
 .list-head h2 { font-size: 16px; font-weight: 600; margin: 0; }

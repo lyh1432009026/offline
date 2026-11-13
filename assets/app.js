@@ -5,7 +5,7 @@
   var DATA = window.__OFFLINE_HUB__ || { meta: {}, categories: [], items: [] };
   var ITEMS = DATA.items || [];
   var CATS = DATA.categories || [];
-  var state = { q: '', cat: '', host: '', hostsExpanded: false, manifest: null, openId: null };
+  var state = { q: '', cat: '', manifest: null, openId: null };
 
   var $ = function (s) { return document.querySelector(s); };
   var esc = function (v) {
@@ -80,23 +80,12 @@
         esc(x.name) + ' <span style="opacity:.65">' + n + '</span></button>';
     });
     $('#category-chips').innerHTML = c;
-
-    var shown = state.hostsExpanded ? allHosts : allHosts.slice(0, 8);
-    var h = '<button class="chip' + (state.host === '' ? ' on' : '') + '" data-host="">不限</button>';
-    shown.forEach(function (x) {
-      h += '<button class="chip host' + (state.host === x ? ' on' : '') + '" data-host="' + esc(x) + '">' + esc(x) + '</button>';
-    });
-    if (allHosts.length > 8) {
-      h += '<button class="chip-more" id="host-more">' + (state.hostsExpanded ? '收起' : '展开全部 ' + allHosts.length + ' 个') + '</button>';
-    }
-    $('#host-chips').innerHTML = h;
   }
 
   function filtered() {
     var q = state.q.trim().toLowerCase();
     return ITEMS.filter(function (it) {
       if (state.cat && it.category !== state.cat) return false;
-      if (state.host && (it.cdnHosts || []).indexOf(state.host) < 0) return false;
       if (!q) return true;
       var hay = [it.id, it.name, it.package, it.summary, it.license, catName(it.category)]
         .concat(it.cdnHosts || []).join(' ').toLowerCase();
@@ -204,19 +193,13 @@
   /* 事件绑定 */
   $('#search').addEventListener('input', function (e) { state.q = e.target.value; renderGrid(); });
   $('#reset').addEventListener('click', function () {
-    state.q = ''; state.cat = ''; state.host = ''; state.hostsExpanded = false;
+    state.q = ''; state.cat = '';
     $('#search').value = '';
     renderChips(); renderGrid();
   });
   $('#category-chips').addEventListener('click', function (e) {
     var b = e.target.closest('[data-cat]'); if (!b) return;
     state.cat = b.getAttribute('data-cat'); renderChips(); renderGrid();
-  });
-  $('#host-chips').addEventListener('click', function (e) {
-    if (e.target.id === 'host-more') { state.hostsExpanded = !state.hostsExpanded; renderChips(); return; }
-    var b = e.target.closest('[data-host]'); if (!b) return;
-    var v = b.getAttribute('data-host');
-    state.host = state.host === v ? '' : v; renderChips(); renderGrid();
   });
   $('#grid').addEventListener('click', function (e) {
     var card = e.target.closest('.card'); if (!card) return;
